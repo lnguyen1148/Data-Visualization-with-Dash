@@ -8,7 +8,24 @@ import pandas as pd
 data = pd.read_csv("ukr_asylum.csv", usecols=["Year", "Asylum-seekers"])
 
 # Create a plotly figure for dcc.Graph()
-fig = px.line(data, x="Year", y="Asylum-seekers", title="Asylum seekers from Ukraine 2016-2021")
+fig = px.line(
+    data,
+    x="Year",
+    y=["Asylum-seekers"],
+    title="Asylum seekers from Ukraine 2016-2021",
+    color_discrete_map={"Asylum-seekers": "gold"}
+)
+
+fig.update_layout(
+    template="plotly_dark",
+    xaxis_title="Year",
+    yaxis_title="Asylum seekers",
+    font=dict(
+        family="Verdana, sans-serif",
+        size=18,
+        color="white"
+    )
+)
 
 app = dash.Dash(__name__)
 app.title = "Asylum seekers from Ukraine 2016-2021"
